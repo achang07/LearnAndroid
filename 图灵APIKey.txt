@@ -1,0 +1,37 @@
+API Key: 64b6ea19e589d64e49ff0ba5fad7db4c
+
+Api 地址： http://www.tuling123.com/openapi/api
+请求方式： http get
+数据格式： json
+
+访问示例：
+public static void main(String[] args) throws IOException { 
+
+    String APIKEY = "开发者注册帐号，激活之后即可获得"; 
+    String INFO = URLEncoder.encode("北京今日天气", "utf-8"); 
+    String getURL = "http://www.tuling123.com/openapi/api?key=" + APIKEY + "&info=" + INFO; 
+    URL getUrl = new URL(getURL); 
+    HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection(); 
+    connection.connect(); 
+
+    // 取得输入流，并使用Reader读取 
+    BufferedReader reader = new BufferedReader(new InputStreamReader( connection.getInputStream(), "utf-8")); 
+    StringBuffer sb = new StringBuffer(); 
+    String line = ""; 
+    while ((line = reader.readLine()) != null) { 
+        sb.append(line); 
+    } 
+    reader.close(); 
+    // 断开连接 
+    connection.disconnect(); 
+    System.out.println(sb); 
+
+} 
+
+参数	是否必须	长度	示例	说明
+key	必须	32	1ca80891c02eb2edb736b8ce41591426	开发者先注册帐号，激活之后即可获得
+info	必须	1~30	打招呼“你好”，查天气“北京今天天气”	请求内容，编码方式为UTF-8
+userid	上下文必须	1~32	eb2edb736	此userid针对开发者自己的每一个用户
+loc	非必须	1~30	北京中关村	位置信息，编码方式为UTF-8
+lon	非必须	-	东经116.234632（小数点后保留6位），需要写为116234632	经度信息
+lat	非必须	-	北纬40.234632（小数点后保留6位），需要写为40234632	纬度信息
